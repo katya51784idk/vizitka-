@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuki Tanaka | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Lexend', sans-serif;
+            background: #1a1a1a; /* Темный фон на случай если картинка не грузится */
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Контейнер для лепестков сакуры */
+        #sakura-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            color: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            max-width: 900px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 30px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 183, 197, 0.6);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .avatar:hover { transform: scale(1.02) rotate(1deg); }
+
+        .info { flex: 1; }
+
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 5px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #ffb7c5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #ffb7c5;
+            margin-bottom: 25px;
+            letter-spacing: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-bottom: 2px solid rgba(255, 183, 197, 0.3);
+            padding-bottom: 5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            color: #ffb7c5;
+            border-color: #ffb7c5;
+            padding-left: 8px;
+        }
+
+        /* Анимация лепестков */
+        .petal {
+            position: absolute;
+            background: #ffb7c5;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        @media (max-width: 800px) {
+            .glass-card { flex-direction: column; text-align: center; padding: 40px; }
+            .avatar { width: 200px; height: 200px; }
+            h1 { font-size: 2.8rem; }
+            .nav-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sakura-container"></div>
+
+    <div class="glass-card">
+        <img src="Японка.jpeg" alt="Yuki" class="avatar">
+        
+        <div class="info">
+            <h1>YUKI</h1>
+            <div class="subtitle">Software Engineer</div>
+            
+            <p class="description">
+                私は最も穏やかなプログラマーで、コードを書きます。みんなは私を天使と呼んでくれます。<br>
+                Пишу элегантный код, вдохновленный японской эстетикой.
+            </p>
+
+            <div class="nav-links">
+                <a href="https://github.com/katya51784idk" target="_blank">GITHUB</a>
+                <a href="https://github.com/katya51784idk/project" target="_blank">PROJECTS</a>
+                <a href="mailto:hello@yuki.dev">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createPetal() {
+            const container = document.getElementById('sakura-container');
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            const size = Math.random() * 10 + 5 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+            petal.style.opacity = Math.random();
+            
+            container.appendChild(petal);
+            
+            setTimeout(() => { petal.remove(); }, 8000);
+        }
+
+        setInterval(createPetal, 200);
+    </script>
+</body>
+</html>
